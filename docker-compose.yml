@@ -1,0 +1,19 @@
+---
+
+version: "3.7"
+
+services:
+  sftp:
+    container_name: sftp
+    image: atmoz/sftp:debian-stretch
+    volumes:
+      - ./ssh-keys/dummy-key.pub:/home/foo/.ssh/keys/dummy-key.pub:ro
+      - sftp-vol:/home/foo/upload
+    ports:
+      - "2222:22"
+    command: foo::::upload
+
+volumes:
+  sftp-vol:
+    name: sftp-vol
+    driver: local
