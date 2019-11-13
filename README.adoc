@@ -1,0 +1,24 @@
+=== Dockerコンテナでdocker volumeをSFTPで公開
+
+----
+$ make setup
+$ make up
+----
+
+----
+$ make sftp
+----
+
+=== SFTPのメモ
+
+* upload
+
+----
+sftp> put hoge upload/hoge
+----
+
+* download
+
+----
+sftp> get upload/hoge
+----
