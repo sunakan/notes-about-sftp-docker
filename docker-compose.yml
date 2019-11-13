@@ -5,13 +5,16 @@ version: "3.7"
 services:
   sftp:
     container_name: sftp
-    image: atmoz/sftp:debian-stretch
+    image: atmoz/sftp:${SFTP_VERSION_TAG}
     volumes:
-      - ./ssh-keys/dummy-key.pub:/home/foo/.ssh/keys/dummy-key.pub:ro
-      - sftp-vol:/home/foo/upload
+      - ./ssh-keys/dummy-key.pub:/home/${EXEC_USER}/.ssh/keys/dummy-key.pub:ro
+      - ./chown.sh:/etc/sftp.d/chown.sh:ro
+      - sftp-vol:/home/${EXEC_USER}/upload
     ports:
       - "2222:22"
-    command: foo::::upload
+    environment:
+      - EXEC_USER=${EXEC_USER}
+    command: ${EXEC_USER}::::upload
 
 volumes:
   sftp-vol:
